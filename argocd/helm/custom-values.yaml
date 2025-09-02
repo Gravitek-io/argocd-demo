@@ -1,0 +1,34 @@
+# H-A
+redis-ha:
+  enabled: false
+
+controller:
+  replicas: 2
+
+server:
+  replicas: 2
+
+repoServer:
+  replicas: 2
+
+
+applicationSet:
+  replicas: 2
+
+configs:
+  cm:
+    # url: "https://argocd.talos-argo-1.lab.vrchr.fr"
+
+    timeout.reconciliation: 600s # Set reconciliation to 10 min instead of 3 min
+
+  clusterCredentials:
+    talos-argo-1:
+      server: https://kubernetes.default.svc
+      labels:
+        argocd.argoproj.io/auto-label-cluster-info: "true"
+        argocd.argoproj.io/cluster-name: talos-argo-1
+        argocd.argoproj.io/cluster-type: development
+        argocd.argoproj.io/cluster-management: "true"
+      config:
+        tlsClientConfig:
+        insecure: false

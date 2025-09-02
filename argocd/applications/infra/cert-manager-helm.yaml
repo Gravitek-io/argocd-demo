@@ -1,0 +1,55 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: cert-manager
+spec:
+  generators:
+    - merge:
+        mergeKeys:
+          - name
+        generators:
+          - clusters:
+              values:
+                helmChartName: 'cert-manager' # Must not change
+                helmReleaseName: 'cert-manager' # Can be different from a cluster to another
+                namespace: 'cert-manager' # Can be different from a cluster to another
+                # Get Cluster version : https://github.com/argoproj/argo-cd/blob/master/docs/operator-manual/applicationset/Generators-Cluster.md#fetch-clusters-based-on-their-k8s-version
+                clusterVersion: '{{ metadata.labels.argocd.argoproj.io/kubernetes-version }}' # Kubernetes version : 1.26, 1.27, ...
+                clusterType: '{{ metadata.labels.argocd.argoproj.io/cluster-type }}' # Kubernetes environment: development, production
+              selector:
+                matchLabels:
+                  argocd.argoproj.io/secret-type: 'cluster'
+          - git:
+              repoURL: 'https://github.com/rverchere/argocd-demo.git'
+              revision: 'HEAD'
+              files:
+                - path: 'resources/helm-charts/clusters/*/cert-manager/params.json'
+                # This does not work: we cannot use {{ name }} and {{ helmChartName }} here as it's not yet generated
+                # - path: resources/helm-charts/clusters/{{ name }}/{{ helmChartName }}/params.json'
+  template:
+    metadata:
+      name: '{{ name }}-helm-{{ values.helmChartName }}'
+      namespace: 'argocd'
+    spec:
+      project: 'infra'
+      destination:
+        server: '{{ server }}'
+        namespace: '{{ values.namespace }}'
+      source:
+        repoURL: 'https://github.com/rverchere/argocd-demo.git'
+        targetRevision: 'HEAD'
+        path: 'resources/helm-charts/versions/{{ values.clusterVersion }}/{{ values.helmChartName }}/'
+        helm:
+          releaseName: '{{ values.helmReleaseName }}'
+          valueFiles:
+            - '../../../environments/{{ values.clusterType }}/{{ values.helmChartName }}/custom-values.yaml'
+            - '../../../clusters/{{ name }}/{{ values.helmChartName }}/custom-values.yaml'
+          ignoreMissingValueFiles: true
+      syncPolicy:
+        syncOptions:
+        - CreateNamespace=true
+        - PrunePropagationPolicy=orphan
+        - ServerSideApply=true
+
+  syncPolicy:
+    preserveResourcesOnDeletion: true

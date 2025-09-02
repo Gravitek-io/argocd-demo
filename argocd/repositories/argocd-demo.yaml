@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: argocd-demo-repo
+  namespace: argocd
+  labels:
+    argocd.argoproj.io/secret-type: repository
+stringData:
+  type: git
+  url: https://github.com/rverchere/argocd-demo.git
+  username: argocd
+  password: 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

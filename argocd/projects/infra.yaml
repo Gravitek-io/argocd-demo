@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: infra
+  namespace: argocd
+spec:
+  sourceRepos:
+  - '*'
+  destinations:
+  - namespace: 'argocd'
+    server: '*'
+  - namespace: 'cert-manager'
+    server: '*'
+  - namespace: '*nginx*'
+    server: '*'
+  - namespace: 'kube-system'
+    server: '*'
+  - namespace: 'observability'
+    server: '*'
+  - namespace: 'velero'
+    server: '*'
+  - namespace: 'vpa'
+    server: '*'
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  orphanedResources:
+    warn: false

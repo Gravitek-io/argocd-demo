@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: infra-apps
+  namespace: argocd
+spec:
+  project: infra
+  source:
+    path: argocd/applications/infra
+    repoURL: 'https://github.com/rverchere/argocd-demo.git'
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: argocd
+  syncPolicy:
+    automated: {}
+    syncOptions:
+      - PrunePropagationPolicy=orphan
+      - ServerSideApply=true
