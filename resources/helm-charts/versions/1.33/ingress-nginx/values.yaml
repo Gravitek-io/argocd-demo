@@ -1,7 +1,7 @@
 ingress-nginx:
   controller:
 
-    replicaCount: 2
+    replicaCount: 1
 
     # -- Process Ingress objects without ingressClass annotation/ingressClassName field
     # Overrides value for --watch-ingress-without-class flag of the controller binary
@@ -27,4 +27,5 @@ ingress-nginx:
     allowSnippetAnnotations: true
 
     service:
+      type: NodePort
       externalTrafficPolicy: Local
