@@ -28,7 +28,7 @@ spec:
       name: '{{ name }}-helm-{{ values.helmChartName }}'
       namespace: 'argocd'
     spec:
-      project: 'infra'
+      project: 'default'
       destination:
         server: '{{ server }}'
         namespace: '{{ values.namespace }}'

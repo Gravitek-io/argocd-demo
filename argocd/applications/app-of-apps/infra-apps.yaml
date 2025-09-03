@@ -4,7 +4,7 @@ metadata:
   name: infra-apps
   namespace: argocd
 spec:
-  project: infra
+  project: default
   source:
     path: argocd/applications/infra
     repoURL: 'https://github.com/rverchere/argocd-demo.git'
