@@ -32,8 +32,8 @@ spec:
         helm:
           releaseName: goldilocks
           valueFiles:
-            - '../../../environments/{{ values.clusterType }}/goldilocks/custom-values.yaml'
-            - '../../../clusters/{{ name }}/goldilocks/custom-values.yaml'
+            - '../../../resources/helm-charts/environments/{{ values.clusterType }}/goldilocks/custom-values.yaml'
+            - '../../../resources/helm-charts/clusters/{{ name }}/goldilocks/custom-values.yaml'
           ignoreMissingValueFiles: true
       syncPolicy:
         syncOptions:
