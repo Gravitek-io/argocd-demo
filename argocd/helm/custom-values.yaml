@@ -2,18 +2,22 @@
 redis-ha:
   enabled: false
 
+global:
+  image:
+    tag: "v3.0.13"
+
 controller:
-  replicas: 2
+  replicas: 1
 
 server:
-  replicas: 2
+  replicas: 1
 
 repoServer:
-  replicas: 2
+  replicas: 1
 
 
 applicationSet:
-  replicas: 2
+  replicas: 1
 
 configs:
   cm:
