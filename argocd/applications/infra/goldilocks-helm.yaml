@@ -4,48 +4,36 @@ metadata:
   name: goldilocks
 spec:
   generators:
-    - merge:
-        mergeKeys:
-          - name
-        generators:
-          - clusters:
+    - clusters:
+        values:
+          clusterVersion: '{{ metadata.labels.argocd.argoproj.io/kubernetes-version }}' # Kubernetes version : 1.26, 1.27, ...
+          clusterType: '{{ metadata.labels.argocd.argoproj.io/cluster-type }}' # Kubernetes environment: development, production
+        selector:
+          matchLabels:
+            argocd.argoproj.io/secret-type: 'cluster'
+          matchExpressions:
+            - key: 'argocd.argoproj.io/application-helm-goldilocks'
+              operator: 'NotIn'
               values:
-                helmChartName: 'goldilocks' # Must not change
-                helmReleaseName: 'goldilocks' # Can be different from a cluster to another
-                namespace: 'vpa' # Can be different from a cluster to another
-                clusterVersion: '{{ metadata.labels.argocd.argoproj.io/kubernetes-version }}' # Kubernetes version : 1.26, 1.27, ...
-                clusterType: '{{ metadata.labels.argocd.argoproj.io/cluster-type }}' # Kubernetes environment: development, production
-              selector:
-                matchLabels:
-                  argocd.argoproj.io/secret-type: 'cluster'
-                matchExpressions:
-                  - key: 'argocd.argoproj.io/application-helm-goldilocks'
-                    operator: 'NotIn'
-                    values:
-                    - 'disabled'
-          - git:
-              repoURL: 'https://github.com/rverchere/argocd-demo.git'
-              revision: 'HEAD'
-              files:
-                - path: 'resources/helm-charts/clusters/*/goldilocks/params.json'
+              - 'disabled'
   template:
     metadata:
-      name: '{{ name }}-helm-{{ values.helmChartName }}'
+      name: '{{ name }}-helm-goldilocks'
       namespace: 'argocd'
     spec:
       project: 'default'
       destination:
         server: '{{ server }}'
-        namespace: '{{ values.namespace }}'
+        namespace: 'vpa'
       source:
-        repoURL: 'https://github.com/rverchere/argocd-demo.git'
-        targetRevision: 'HEAD'
-        path: 'resources/helm-charts/versions/{{ values.clusterVersion }}/{{ values.helmChartName }}/'
+        chart: goldilocks
+        repoURL:  https://charts.fairwinds.com/stable
+        targetRevision: 9.0.2
         helm:
-          releaseName: '{{ values.helmReleaseName }}'
+          releaseName: goldilocks
           valueFiles:
-            - '../../../environments/{{ values.clusterType }}/{{ values.helmChartName }}/custom-values.yaml'
-            - '../../../clusters/{{ name }}/{{ values.helmChartName }}/custom-values.yaml'
+            - '../../../environments/{{ values.clusterType }}/goldilocks/custom-values.yaml'
+            - '../../../clusters/{{ name }}/goldilocks/custom-values.yaml'
           ignoreMissingValueFiles: true
       syncPolicy:
         syncOptions:
