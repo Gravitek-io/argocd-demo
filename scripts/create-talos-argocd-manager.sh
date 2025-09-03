@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 
-set -e
+set -eu
 
 CLUSTER_NAME="${CLUSTER_PREFIX}-manager"
+LOCAL_NETWORK_SUBNET="${LOCAL_NETWORK_SUBNET_PREFIX}.0.0/24"
 
 echo "[+] Création du réseau Docker..."
 docker network create \
   --driver bridge \
-  --subnet=${NETWORK_SUBNET} ${SHARED_NETWORK_NAME} \
+  --subnet=${SHARED_NETWORK_SUBNET} ${SHARED_NETWORK_NAME} \
   || echo "Le réseau existe déjà."
-
 
 # Vérification de l'existence du cluster
 if docker container ls | grep -q "${CLUSTER_NAME}\b"; then
@@ -21,7 +21,7 @@ fi
 echo "[+] Création du cluster manager..."
 talosctl cluster create \
   --name "${CLUSTER_NAME}" \
-  --cidr ${LOCAL_NETWORK_SUBNET_BASE}
+  --cidr ${LOCAL_NETWORK_SUBNET}
 
 echo "[+] Connexion de cluster manager au réseau ${SHARED_NETWORK_NAME}..."
 docker network connect \

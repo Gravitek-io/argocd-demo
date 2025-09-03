@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
 
-set -e
+set -eu
 
 # Downstream clusters
 for i in $(seq 1 ${CLUSTER_COUNT}); do
 
+  CLUSTER_NAME="${CLUSTER_PREFIX}-${i}"
   LOCAL_NETWORK_SUBNET="${LOCAL_NETWORK_SUBNET_PREFIX}.$((i*10)).0/24"
+  LOCAL_CP_IP="${LOCAL_NETWORK_SUBNET_PREFIX}.$((i*10)).2"
   SHARED_CP_IP="${SHARED_NETWORK_SUBNET_PREFIX}.$((IP_BASE + i*IP_STEP))"
   SHARED_WK_IP="${SHARED_NETWORK_SUBNET_PREFIX}.$((IP_BASE + i*IP_STEP + 1))"
-  LOCAL_CP_IP="${LOCAL_NETWORK_SUBNET_PREFIX}.$((i*10)).2"
-  CLUSTER_NAME="${CLUSTER_PREFIX}-${i}"
-
+  
   # Vérification de l'existence du cluster
   if docker container ls | grep -q "${CLUSTER_NAME}\b"; then
     echo "[!] Le cluster ${CLUSTER_NAME} existe déjà, création ignorée."

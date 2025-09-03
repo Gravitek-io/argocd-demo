@@ -22,11 +22,11 @@ configs:
     timeout.reconciliation: 600s # Set reconciliation to 10 min instead of 3 min
 
   clusterCredentials:
-    talos-argo-1:
+    talos-argocd-manager:
       server: https://kubernetes.default.svc
       labels:
         argocd.argoproj.io/auto-label-cluster-info: "true"
-        argocd.argoproj.io/cluster-name: talos-argo-1
+        argocd.argoproj.io/cluster-name: talos-argocd-manager
         argocd.argoproj.io/cluster-type: development
         argocd.argoproj.io/cluster-management: "true"
       config:

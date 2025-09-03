@@ -28,7 +28,8 @@ Setup downstream clusters, projects, repositories and co
 
 ```
 ./script/create-talos-argocd-downstream.sh
-./script/generate-cluster-secret.sh
+
+./script/enroll-talos-argocd-downstream.sh
 ```
 
 Enjoy!
