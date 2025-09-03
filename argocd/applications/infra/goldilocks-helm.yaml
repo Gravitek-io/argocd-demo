@@ -25,16 +25,20 @@ spec:
       destination:
         server: '{{ server }}'
         namespace: 'vpa'
-      source:
-        chart: goldilocks
-        repoURL:  https://charts.fairwinds.com/stable
-        targetRevision: 9.0.2
-        helm:
-          releaseName: goldilocks
-          valueFiles:
-            - '../../../resources/helm-charts/environments/{{ values.clusterType }}/goldilocks/custom-values.yaml'
-            - '../../../resources/helm-charts/clusters/{{ name }}/goldilocks/custom-values.yaml'
-          ignoreMissingValueFiles: true
+      sources:
+        - chart: goldilocks
+          repoURL:  https://charts.fairwinds.com/stable
+          targetRevision: 9.0.2
+          helm:
+            releaseName: goldilocks
+            valueFiles:
+              - '$values/environments/{{ values.clusterType }}/goldilocks/custom-values.yaml'
+              - '$values/clusters/{{ name }}/goldilocks/custom-values.yaml'
+            ignoreMissingValueFiles: true
+        - repoURL: 'https://github.com/rverchere/argocd-demo.git'
+          targetRevision: HEAD
+          path: 'resources/helm-charts'
+          ref: values
       syncPolicy:
         syncOptions:
         - CreateNamespace=true
