@@ -30,6 +30,7 @@ spec:
           chart: goldilocks
           targetRevision: 9.0.2
           helm:
+            releaseName: goldilocks
             valueFiles:
               - '$values/resources/helm-charts/environments/{{ values.clusterType }}/goldilocks/custom-values.yaml'
               - '$values/resources/helm-charts/clusters/{{ name }}/goldilocks/custom-values.yaml'
