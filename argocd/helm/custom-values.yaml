@@ -1,11 +1,3 @@
-# H-A
-redis-ha:
-  enabled: false
-
-global:
-  image:
-    tag: "v3.0.13"
-
 controller:
   replicas: 1
 
@@ -15,16 +7,10 @@ server:
 repoServer:
   replicas: 1
 
-
 applicationSet:
   replicas: 1
 
 configs:
-  cm:
-    # url: "https://argocd.talos-argo-1.lab.vrchr.fr"
-
-    timeout.reconciliation: 600s # Set reconciliation to 10 min instead of 3 min
-
   clusterCredentials:
     talos-argocd-manager:
       server: https://kubernetes.default.svc
