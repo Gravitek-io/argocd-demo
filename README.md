@@ -6,26 +6,30 @@ Local clusters:
 
 ```
 docker network create --driver bridge --subnet=172.30.0.0/16 talos-shared
-talosctl cluster create --name talos-argo-1 --cidr 10.5.0.0/24
-talosctl cluster create --name talos-argo-2 --cidr 10.6.0.0/24
-talosctl cluster create --name talos-argo-3 --cidr 10.7.0.0/24
-talosctl cluster create --name talos-argo-4 --cidr 10.8.0.0/24
+talosctl cluster create --name talos-argocd-manager --cidr 10.5.0.0/24
+talosctl cluster create --name talos-argocd-1 --cidr 10.5.10.0/24
+talosctl cluster create --name talos-argocd-2 --cidr 10.5.20.0/24
+talosctl cluster create --name talos-argocd-3 --cidr 10.5.30.0/24
+talosctl cluster create --name talos-argocd-3 --cidr 10.5.40.0/24
 ```
 ```
-docker network connect --ip 172.30.0.11 talos-shared talos-argo-1-controlplane-1
-docker network connect --ip 172.30.0.12 talos-shared talos-argo-1-worker-1
-docker network connect --ip 172.30.0.21 talos-shared talos-argo-2-controlplane-1
-docker network connect --ip 172.30.0.22 talos-shared talos-argo-2-worker-1
-docker network connect --ip 172.30.0.31 talos-shared talos-argo-3-controlplane-1
-docker network connect --ip 172.30.0.32 talos-shared talos-argo-3-worker-1
-docker network connect --ip 172.30.0.41 talos-shared talos-argo-4-controlplane-1
-docker network connect --ip 172.30.0.42 talos-shared talos-argo-4-worker-1
+docker network connect --ip 172.30.0.101 talos-shared alos-argocd-manager-controlplane-1
+docker network connect --ip 172.30.0.102 talos-shared talos-argocd-manager-worker-1
+docker network connect --ip 172.30.0.111 talos-shared talos-argocd-1-controlplane-1
+docker network connect --ip 172.30.0.112 talos-shared talos-argocd-1-worker-1
+docker network connect --ip 172.30.0.121 talos-shared talos-argocd-2-controlplane-1
+docker network connect --ip 172.30.0.122 talos-shared talos-argocd-2-worker-1
+docker network connect --ip 172.30.0.131 talos-shared talos-argocd-3-controlplane-1
+docker network connect --ip 172.30.0.132 talos-shared talos-argocd-3-worker-1
+docker network connect --ip 172.30.0.141 talos-shared talos-argocd-4-controlplane-1
+docker network connect --ip 172.30.0.142 talos-shared talos-argocd-4-worker-1
 ```
 
 ```
-talosctl --context talos-argo-2 -n 127.0.0.1 patch mc --patch @setup/mc-talos-argo-2-patch.yaml
-talosctl --context talos-argo-3 -n 127.0.0.1 patch mc --patch @setup/mc-talos-argo-3-patch.yaml
-talosctl --context talos-argo-4 -n 127.0.0.1 patch mc --patch @setup/mc-talos-argo-4-patch.yaml
+talosctl --context talos-argocd-1 -n 127.0.0.1 patch mc --patch @setup/mc-talos-argocd-1-patch.yaml
+talosctl --context talos-argocd-2 -n 127.0.0.1 patch mc --patch @setup/mc-talos-argocd-2-patch.yaml
+talosctl --context talos-argocd-3 -n 127.0.0.1 patch mc --patch @setup/mc-talos-argocd-3-patch.yaml
+talosctl --context talos-argocd-4 -n 127.0.0.1 patch mc --patch @setup/mc-talos-argocd-4-patch.yaml
 ```
 
 
@@ -49,3 +53,11 @@ Setup downstream clusters, projects, repositories and co
 ```
 
 Enjoy!
+
+
+## Destroy
+
+```
+talosctl cluster destroy --name talos-argocd-manager
+talosctl config remove talos-argocd-manager 
+```

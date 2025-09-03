@@ -5,11 +5,11 @@
 # the name of the secret containing the service account token goes here
 SERVICE_ACCOUNT=argocd-manager
 NAMESPACE=kube-system
-ADMIN_CLUSTER="talos-argo-1"
-DOWNSTREAM_CLUSTERS=("talos-argo-2" "talos-argo-3" "talos-argo-4")
+ADMIN_CLUSTER="talos-argo-manager"
+DOWNSTREAM_CLUSTERS=("talos-argo-1" "talos-argo-2" "talos-argo-3" "talos-argo-4")
 DOWNSTREAM_CLUSTERS_BASE_API_IP="172.30.0."
 
-ip_suffix=21 # talos-argo-2 -> 21, talos-argo-3 -> 31, talos-argo-4 -> 41
+ip_suffix=111 # talos-argo-1 -> 111, talos-argo-2 -> 121, talos-argo-3 -> 131, talos-argo-4 -> 141
 
 for cluster in "${DOWNSTREAM_CLUSTERS[@]}"; do
   context="admin@${cluster}"
