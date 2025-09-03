@@ -2,13 +2,11 @@
 
 ## setup
 
-Local clusters:
+Management cluster :
 
 ```
-export KUBECONFIG=${PWD}/kubeconfig
-./setup/create-talos-multi.sh
+./script/create-talos-argocd-manager.sh
 ```
-
 
 Install ArgoCD
 
@@ -25,10 +23,12 @@ open http://localhost:8080
 ```
 
 
+
 Setup downstream clusters, projects, repositories and co
 
 ```
-./setup/generate-cluster-secret.sh
+./script/create-talos-argocd-downstream.sh
+./script/generate-cluster-secret.sh
 ```
 
 Enjoy!
@@ -37,24 +37,5 @@ Enjoy!
 ## Destroy
 
 ```
-talosctl config context talos-1 # Set other talos context
-
-talosctl cluster destroy --name talos-argocd-manager
-talosctl config remove talos-argocd-manager -y
-kubectl config delete-cluster talos-argocd-manager
-kubectl config delete-user admin@talos-argocd-manager
-kubectl config delete-context admin@talos-argocd-manager
-
-
-talosctl cluster destroy --name talos-argocd-1
-talosctl config remove talos-argocd-1 -y
-kubectl config delete-cluster talos-argocd-1
-kubectl config delete-user admin@talos-argocd-1
-kubectl config delete-context admin@talos-argocd-1
-
-talosctl cluster destroy --name talos-argocd-2
-talosctl config remove talos-argocd-2 -y
-kubectl config delete-cluster talos-argocd-2
-kubectl config delete-user admin@talos-argocd-2
-kubectl config delete-context admin@talos-argocd-2 
+./scripts/destroy-all.sh
 ```
