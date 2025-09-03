@@ -8,8 +8,6 @@ NAMESPACE=kube-system
 CLUSTER_MANAGER_NAME="${CLUSTER_PREFIX}-manager"
 DOWNSTREAM_CLUSTERS_BASE_API_IP="172.30.0."
 
-ip_suffix=111 # talos-argo-1 -> 111, talos-argo-2 -> 121, talos-argo-3 -> 131, talos-argo-4 -> 141
-
 for i in $(seq 1 ${CLUSTER_COUNT}); do
 
   CLUSTER_NAME="${CLUSTER_PREFIX}-${i}"
@@ -47,6 +45,7 @@ EOF
 
   kubectl --context admin@${CLUSTER_MANAGER_NAME} apply -f secret-cluster-${CLUSTER_NAME}.yaml
   rm secret-cluster-${CLUSTER_NAME}.yaml
+
 done
 
 # Set up projects, repos, app-of-apps
