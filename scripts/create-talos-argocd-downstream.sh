@@ -21,6 +21,7 @@ for i in $(seq 1 ${CLUSTER_COUNT}); do
   talosctl cluster create \
     --name "${CLUSTER_NAME}" \
     --cidr "${LOCAL_NETWORK_SUBNET}" \
+    --kubernetes-version "${KUBERNETES_VERSION}" \
     --config-patch-control-plane "[{\"op\": \"replace\", \"path\": \"/cluster/apiServer/certSANs\", \"value\": [\"${SHARED_CP_IP}\", \"${LOCAL_CP_IP}\", \"127.0.0.1\" ]}]"
 
   echo "[+] Connexion du downstream cluster ${CLUSTER_NAME} au réseau ${SHARED_NETWORK_NAME}..."

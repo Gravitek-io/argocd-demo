@@ -1,0 +1,24 @@
+---
+# Create Gitlab CI Service Account
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: gitlab
+  namespace: kube-system
+
+# Create role binding
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: gitlab-default
+  namespace: default
+subjects:
+  - kind: ServiceAccount
+    name: gitlab
+    namespace: kube-system
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+

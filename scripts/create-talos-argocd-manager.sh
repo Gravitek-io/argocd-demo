@@ -21,7 +21,8 @@ fi
 echo "[+] Création du cluster manager..."
 talosctl cluster create \
   --name "${CLUSTER_NAME}" \
-  --cidr ${LOCAL_NETWORK_SUBNET}
+  --cidr ${LOCAL_NETWORK_SUBNET} \
+  --kubernetes-version "${KUBERNETES_VERSION}"
 
 echo "[+] Connexion de cluster manager au réseau ${SHARED_NETWORK_NAME}..."
 docker network connect \
