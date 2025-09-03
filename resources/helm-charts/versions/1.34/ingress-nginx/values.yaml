@@ -1,0 +1,31 @@
+ingress-nginx:
+  controller:
+
+    replicaCount: 1
+
+    # -- Process Ingress objects without ingressClass annotation/ingressClassName field
+    # Overrides value for --watch-ingress-without-class flag of the controller binary
+    # Defaults to false
+    watchIngressWithoutClass: true
+
+    ## This section refers to the creation of the IngressClass resource
+    ## IngressClass resources are supported since k8s >= 1.18 and required since k8s >= 1.19
+    ingressClassResource:
+      # -- Is this the default ingressClass for the cluster
+      default: true
+
+    ## Annotations to be added to the controller config configuration configmap
+    ##
+    config:
+      use-proxy-protocol: "true"
+      real-ip-header: "proxy_protocol"
+      log-format-escape-json: "true"
+      log-format-upstream: '{"msec": "$msec", "connection": "$connection", "connection_requests": "$connection_requests", "pid": "$pid", "request_id": "$request_id", "request_length": "$request_length", "remote_addr": "$remote_addr", "remote_user": "$remote_user", "remote_port": "$remote_port", "time_local": "$time_local", "time_iso8601": "$time_iso8601", "request": "$request", "request_uri": "$request_uri", "args": "$args", "status": "$status", "body_bytes_sent": "$body_bytes_sent", "bytes_sent": "$bytes_sent", "http_referer": "$http_referer", "http_user_agent": "$http_user_agent", "http_x_forwarded_for": "$http_x_forwarded_for", "http_host": "$http_host", "server_name": "$server_name", "request_time": "$request_time", "upstream": "$upstream_addr", "upstream_connect_time": "$upstream_connect_time", "upstream_header_time": "$upstream_header_time", "upstream_response_time": "$upstream_response_time", "upstream_response_length": "$upstream_response_length", "upstream_cache_status": "$upstream_cache_status", "ssl_protocol": "$ssl_protocol", "ssl_cipher": "$ssl_cipher", "scheme": "$scheme", "request_method": "$request_method", "server_protocol": "$server_protocol", "pipe": "$pipe", "gzip_ratio": "$gzip_ratio", "http_cf_ray": "$http_cf_ray" }'
+      proxy-buffer-size: "16k"
+      # annotations-risk-level: "Critical"
+
+    allowSnippetAnnotations: true
+
+    service:
+      type: NodePort
+      externalTrafficPolicy: Local
