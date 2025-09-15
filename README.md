@@ -5,7 +5,7 @@
 Management cluster :
 
 ```
-./script/create-talos-argocd-manager.sh
+./scripts/create-talos-argocd-manager.sh
 ```
 
 Install ArgoCD
@@ -27,9 +27,9 @@ open http://localhost:8080
 Setup downstream clusters, projects, repositories and co
 
 ```
-./script/create-talos-argocd-downstream.sh
+./scripts/create-talos-argocd-downstream.sh
 
-./script/enroll-talos-argocd-downstream.sh
+./scripts/enroll-talos-argocd-downstream.sh
 ```
 
 Enjoy!
