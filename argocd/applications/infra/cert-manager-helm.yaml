@@ -27,8 +27,8 @@ spec:
         helm:
           releaseName: 'cert-manager'
           valueFiles:
-            - '../../../environments/{{ values.clusterType }}/cert-manager/custom-values.yaml'
-            - '../../../clusters/{{ name }}/cert-manager/custom-values.yaml'
+            - '../../../environments/{{ values.clusterType }}/cert-manager/values.yaml'
+            - '../../../clusters/{{ name }}/cert-manager/values.yaml'
           ignoreMissingValueFiles: true
       syncPolicy:
         syncOptions:

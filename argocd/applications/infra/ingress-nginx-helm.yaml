@@ -39,8 +39,8 @@ spec:
         helm:
           releaseName: '{{ values.helmReleaseName }}'
           valueFiles:
-            - '../../../environments/{{ values.clusterType }}/{{ values.helmChartName }}/custom-values.yaml'
-            - '../../../clusters/{{ name }}/{{ values.helmChartName }}/custom-values.yaml'
+            - '../../../environments/{{ values.clusterType }}/{{ values.helmChartName }}/values.yaml'
+            - '../../../clusters/{{ name }}/{{ values.helmChartName }}/values.yaml'
           ignoreMissingValueFiles: true
       syncPolicy:
         syncOptions:

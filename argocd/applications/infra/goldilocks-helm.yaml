@@ -32,8 +32,8 @@ spec:
           helm:
             releaseName: goldilocks
             valueFiles:
-              - '$values/resources/helm-charts/environments/{{ values.clusterType }}/goldilocks/custom-values.yaml'
-              - '$values/resources/helm-charts/clusters/{{ name }}/goldilocks/custom-values.yaml'
+              - '$values/resources/helm-charts/environments/{{ values.clusterType }}/goldilocks/values.yaml'
+              - '$values/resources/helm-charts/clusters/{{ name }}/goldilocks/values.yaml'
             ignoreMissingValueFiles: true
         - repoURL: 'https://github.com/rverchere/argocd-demo.git'
           targetRevision: HEAD
