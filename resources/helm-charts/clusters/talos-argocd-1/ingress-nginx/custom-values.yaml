@@ -1,0 +1,4 @@
+ingress-nginx:
+  controller:
+    config:
+      proxy-buffer-size: "32k"
