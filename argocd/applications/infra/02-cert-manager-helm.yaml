@@ -6,8 +6,8 @@ spec:
   generators:
     - clusters:
         values:
-          clusterVersion: '{{ metadata.labels.argocd.argoproj.io/kubernetes-version }}' # Kubernetes version : 1.26, 1.27, ...
-          clusterType: '{{ metadata.labels.argocd.argoproj.io/cluster-type }}' # Kubernetes environment: development, production
+          clusterVersion: '{{ metadata.labels.argocd.argoproj.io/kubernetes-version }}'
+          clusterType: '{{ metadata.labels.argocd.argoproj.io/cluster-type }}'
         selector:
           matchLabels:
             argocd.argoproj.io/secret-type: 'cluster'

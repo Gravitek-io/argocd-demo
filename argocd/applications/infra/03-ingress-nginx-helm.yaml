@@ -10,11 +10,14 @@ spec:
         generators:
           - clusters:
               values:
-                helmChartName: 'ingress-nginx' # Must not change
-                helmReleaseName: 'ingress-nginx' # Can be different from a cluster to another
-                namespace: 'ingress-nginx' # Can be different from a cluster to another
-                clusterVersion: '{{ metadata.labels.argocd.argoproj.io/kubernetes-version }}' # Kubernetes version : 1.26, 1.27, ...
-                clusterType: '{{ metadata.labels.argocd.argoproj.io/cluster-type }}' # Kubernetes environment: development, production
+                # Must not change
+                helmChartName: 'ingress-nginx'
+                # Can be different from a cluster to another
+                helmReleaseName: 'ingress-nginx'
+                # Can be different from a cluster to another
+                namespace: 'ingress-nginx'
+                clusterVersion: '{{ metadata.labels.argocd.argoproj.io/kubernetes-version }}'
+                clusterType: '{{ metadata.labels.argocd.argoproj.io/cluster-type }}'
               selector:
                 matchLabels:
                   argocd.argoproj.io/secret-type: 'cluster'

@@ -6,8 +6,10 @@ spec:
   generators:
     - clusters:
         values:
-          clusterVersion: '{{ metadata.labels.argocd.argoproj.io/kubernetes-version }}' # Kubernetes version : 1.26, 1.27, ...
-          clusterType: '{{ metadata.labels.argocd.argoproj.io/cluster-type }}' # Kubernetes environment: development, production
+          # Kubernetes version : 1.33, 1.34, ...
+          clusterVersion: '{{ metadata.labels.argocd.argoproj.io/kubernetes-version }}'
+          # Kubernetes environment: development, production
+          clusterType: '{{ metadata.labels.argocd.argoproj.io/cluster-type }}' 
         selector:
           matchLabels:
             argocd.argoproj.io/secret-type: 'cluster'
@@ -32,6 +34,7 @@ spec:
           helm:
             releaseName: goldilocks
             valueFiles:
+              - '$values/resources/helm-charts/versions/1.33/goldilocks/values.yaml'
               - '$values/resources/helm-charts/environments/{{ values.clusterType }}/goldilocks/values.yaml'
               - '$values/resources/helm-charts/clusters/{{ name }}/goldilocks/values.yaml'
             ignoreMissingValueFiles: true
