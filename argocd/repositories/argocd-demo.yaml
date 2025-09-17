@@ -9,4 +9,4 @@ stringData:
   type: git
   url: https://github.com/rverchere/argocd-demo.git
   username: argocd
-  password: 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
+  password: github_pat_i_know_its_bad
