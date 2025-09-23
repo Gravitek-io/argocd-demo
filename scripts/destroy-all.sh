@@ -2,7 +2,6 @@
 
 set -eu
 
-talosctl config context talos-1
 kubectx -u
 
 # Manager
@@ -32,3 +31,6 @@ for i in $(seq 1 ${CLUSTER_COUNT}); do
     kubectl config delete-user admin@${CLUSTER_NAME}
     kubectl config delete-context admin@${CLUSTER_NAME}
 done
+
+mv $KUBECONFIG $KUBECONFIG.bak
+mv $TALOSCONFIG $TALOSCONFIG.bak
