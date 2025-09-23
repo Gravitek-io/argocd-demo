@@ -2,7 +2,7 @@
 
 set -eu
 
-CLUSTER_NAME="talos-argocd-3"
+CLUSTER_NAME=${1:-talos-argocd-3}
 CLUSTER_NEXT_VERSION="1.34.0"
 
 SERVER_URL=$(yq ".clusters[] | select(.name == \"${CLUSTER_NAME}\") | .cluster.server" kubeconfig)
