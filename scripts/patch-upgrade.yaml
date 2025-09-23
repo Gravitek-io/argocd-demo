@@ -1,4 +1,6 @@
-# talosctl --context talos-argocd-2 -n 127.0.0.1 upgrade-k8s --to 1.34.0
+# yq '.clusters[] | select(.name == "talos-argocd-2") | .cluster.server' kubeconfig
+# talosctl --context talos-argocd-3 -n 127.0.0.1 patch mc  --patch @scripts/patch-upgrade.yaml
+# talosctl --context talos-argocd-3 -n 127.0.0.1 upgrade-k8s --to 1.34.0
 - op: replace
   path: /cluster/controlPlane/endpoint
-  value: https://127.0.0.1:54528
+  value: https://127.0.0.1:54734
