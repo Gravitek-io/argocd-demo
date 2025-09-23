@@ -22,7 +22,7 @@ spec:
                 matchLabels:
                   argocd.argoproj.io/secret-type: 'cluster'
           - git:
-              repoURL: 'https://github.com/rverchere/argocd-demo.git'
+              repoURL: 'https://github.com/gravitek-io/argocd-demo.git'
               revision: 'HEAD'
               files:
                 - path: 'resources/helm-charts/clusters/*/ingress-nginx/params.json'
@@ -36,7 +36,7 @@ spec:
         server: '{{ server }}'
         namespace: '{{ values.namespace }}'
       source:
-        repoURL: 'https://github.com/rverchere/argocd-demo.git'
+        repoURL: 'https://github.com/gravitek-io/argocd-demo.git'
         targetRevision: 'HEAD'
         path: 'resources/helm-charts/versions/{{ values.clusterVersion }}/{{ values.helmChartName }}/'
         helm:

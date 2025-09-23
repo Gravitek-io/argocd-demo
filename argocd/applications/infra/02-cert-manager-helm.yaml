@@ -21,7 +21,7 @@ spec:
         server: '{{ server }}'
         namespace: 'cert-manager'
       source:
-        repoURL: 'https://github.com/rverchere/argocd-demo.git'
+        repoURL: 'https://github.com/gravitek-io/argocd-demo.git'
         targetRevision: 'HEAD'
         path: 'resources/helm-charts/versions/{{ values.clusterVersion }}/cert-manager/'
         helm:
