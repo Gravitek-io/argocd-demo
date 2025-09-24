@@ -38,8 +38,9 @@ Add apps
 
 ```shell
 # Set up projects, repos, app-of-apps
-kubectl --context admin@talos-argocd-manager apply -f argocd/repositories/
-kubectl --context admin@talos-argocd-manager apply -f argocd/applications/app-of-apps/
+# No need for public repo
+# kubectl --context admin@talos-argocd-manager apply -f argocd/repositories/
+# kubectl --context admin@talos-argocd-manager apply -f argocd/applications/app-of-apps/
 ```
 
 Enjoy!
