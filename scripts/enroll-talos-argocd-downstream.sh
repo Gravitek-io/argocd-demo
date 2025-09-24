@@ -48,6 +48,6 @@ EOF
 
 done
 
-# Set up projects, repos, app-of-apps
-kubectl --context admin@${CLUSTER_MANAGER_NAME} apply -f argocd/repositories/
-kubectl --context admin@${CLUSTER_MANAGER_NAME} apply -f argocd/applications/app-of-apps/
+## Set up projects, repos, app-of-apps
+#kubectl --context admin@${CLUSTER_MANAGER_NAME} apply -f argocd/repositories/
+#kubectl --context admin@${CLUSTER_MANAGER_NAME} apply -f argocd/applications/app-of-apps/
