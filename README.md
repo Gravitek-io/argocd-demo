@@ -34,21 +34,12 @@ Setup downstream clusters, projects, repositories and co
 ./scripts/enroll-talos-argocd-downstream.sh
 ```
 
-Add apps
-
-```shell
-# Set up projects, repos, app-of-apps
-# No need for public repo
-# kubectl --context admin@talos-argocd-manager apply -f argocd/repositories/
-# kubectl --context admin@talos-argocd-manager apply -f argocd/applications/app-of-apps/
-```
-
-Enjoy!
+Enjoy with demos on the `docs/` folder !
 
 ## Upgrade Talos cluster
 
 ```
-./scripts/upgrade-talos-argocd-downstream-cluster.sh
+./scripts/upgrade-talos-argocd-downstream-cluster.sh talos-argocd-3
 ```
 
 ## Destroy

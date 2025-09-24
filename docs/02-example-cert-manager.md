@@ -11,8 +11,6 @@ ApplicationSet with Umbrella chart
 2. Apply manifest
 
 ```shell
-source .envrc
-
 kubectx admin@talos-argocd-manager
 
 kubectl apply -f argocd/applications/infra/02-cert-manager-helm.yaml

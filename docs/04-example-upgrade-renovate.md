@@ -2,7 +2,11 @@
 
 ## Autolabels
 
-Cluster 3 should be upgraded
+Cluster 3 should be upgraded. If not:
+
+```
+./scripts/upgrade-talos-argocd-downstream-cluster.sh talos-argocd-3
+```
 
 1. Check Chart.yaml for cert-manager: not the same versions
 

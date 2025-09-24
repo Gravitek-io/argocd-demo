@@ -7,8 +7,6 @@
 2. Apply manifest
 
 ```shell
-source .envrc
-
 kubectx admin@talos-argocd-manager
 
 kubectl apply -f argocd/applications/infra/01-goldilocks-helm.yaml
