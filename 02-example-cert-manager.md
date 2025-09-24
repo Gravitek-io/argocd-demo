@@ -26,3 +26,15 @@ kubectl apply -f argocd/applications/infra/02-cert-manager-helm.yaml
 kubectl foreach -q -- get deploy -n cert-manager cert-manager -o jsonpath="{.spec.template.spec.containers[0].args[0]}"
 ```
 
+5. Verify dependency
+
+```shell
+cd resources/helm-charts/versions/1.33/cert-manager
+kubectx admin@talos-argocd-1
+helm dependency build
+helm template cert-manager ./ \
+  --namespace cert-manager \
+  -f ../../../environments/development/cert-manager/values.yaml \
+  -f ../../../clusters/talos-argocd-1/cert-manager/values.yaml \
+  --no-hooks | kubectl diff -f -
+```
