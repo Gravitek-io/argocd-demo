@@ -1,8 +1,12 @@
-# Example 1 - Goldilocks
+# Example 2 - cert-manager
 
-"Simple" ApplicationSet with helm and values
+ApplicationSet with Umbrella chart
+
 
 1. Show folders resources, manifests, etc.
+  - argocd/applications/infra/02-cert-manager-helm.yaml
+  - resources/helm-charts/versions/1.33/cert-manager/Chart.yaml
+  - resources/helm-charts/versions/1.33/cert-manager/values.yaml
 
 2. Apply manifest
 
@@ -11,7 +15,7 @@ source .envrc
 
 kubectx admin@talos-argocd-manager
 
-kubectl apply -f argocd/applications/infra/01-goldilocks-helm.yaml
+kubectl apply -f argocd/applications/infra/02-cert-manager-helm.yaml
 ```
 
 3. Check on ArgoCD webapp
