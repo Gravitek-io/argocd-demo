@@ -20,18 +20,9 @@ kubectl apply -f argocd/applications/infra/02-cert-manager-helm.yaml
 
 3. Check on ArgoCD webapp
 
-4. Check requests CPU with `talos-argocd-1` and `talos-argocd-2`
+4. Check logLevel `talos-argocd-1` and `talos-argocd-2`
 
 ```shell
-kubectl foreach -q -- get deploy -n vpa goldilocks-controller -o jsonpath="{.spec.template.spec.containers[0].resources.requests.cpu}"
+kubectl foreach -q -- get deploy -n cert-manager cert-manager -o jsonpath="{.spec.template.spec.containers[0].args[0]}"
 ```
 
-5. Promote `talos-argocd-2` to production
-
-```shell
-kubecolor get secret argocd-cluster-talos-argocd-2 -o yaml
-
-kubectl foreach -q -- get deploy -n vpa goldilocks-controller -o jsonpath="{.spec.template.spec.containers[0].imagePullPolicy}"
-
-kubectl label secrets argocd-cluster-talos-argocd-2 argocd.argoproj.io/cluster-type=production --overwrite
-```
