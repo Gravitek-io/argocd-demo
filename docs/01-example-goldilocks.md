@@ -17,7 +17,7 @@ kubectl apply -f argocd/applications/infra/01-goldilocks-helm.yaml
 4. Check requests CPU with `talos-argocd-1` and `talos-argocd-2`
 
 ```shell
-kubectl foreach -q -- get deploy -n vpa goldilocks-controller -o jsonpath="{.spec.template.spec.containers[0].resources.requests.cpu}"
+kubectl foreach -q -- get deploy -n goldilocks goldilocks-controller -o jsonpath="{.spec.template.spec.containers[0].resources.requests.cpu}"
 ```
 
 5. Promote `talos-argocd-2` to production
@@ -25,7 +25,7 @@ kubectl foreach -q -- get deploy -n vpa goldilocks-controller -o jsonpath="{.spe
 ```shell
 kubecolor get secret argocd-cluster-talos-argocd-2 -o yaml
 
-kubectl foreach -q -- get deploy -n vpa goldilocks-controller -o jsonpath="{.spec.template.spec.containers[0].imagePullPolicy}"
+kubectl foreach -q -- get deploy -n goldilocks goldilocks-controller -o jsonpath="{.spec.template.spec.containers[0].imagePullPolicy}"
 
 kubectl label secrets argocd-cluster-talos-argocd-2 argocd.argoproj.io/cluster-type=production --overwrite
 ```
