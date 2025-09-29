@@ -24,11 +24,3 @@ kubectx admin@talos-argocd-manager
 
 kubectl apply -f argocd/applications/infra/03-ingress-nginx-helm.yaml
 ```
-
-5. App of Apps
-
-Set the App Of Apps pattern
-
-```
-kubectl apply -f argocd/applications/app-of-apps/infra-apps.yaml 
-```

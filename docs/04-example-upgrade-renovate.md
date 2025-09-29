@@ -19,3 +19,11 @@ Cluster 3 should be upgraded. If not:
 Go to Github, apply some merge
 
 Note that there is no proposition for goldilocks
+
+## End - App of Apps
+
+Set the App Of Apps pattern
+
+```
+kubectl apply -f argocd/applications/app-of-apps/infra-apps.yaml 
+```
