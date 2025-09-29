@@ -7,7 +7,7 @@ ApplicationSet with Git Generator
 ```
 kctx admin@talos-argocd-3
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
-helm install -n nginx --create-namespace nginx ingress-nginx/ingress-nginx --version 4.11.6 --set controller.service.type=NodePort
+helm install -n incorrect-nginx --create-namespace incorrect-nginx ingress-nginx/ingress-nginx --version 4.11.6 --set controller.service.type=NodePort
 kubecolor get all -n nginx
 ```
 
@@ -25,8 +25,10 @@ kubectx admin@talos-argocd-manager
 kubectl apply -f argocd/applications/infra/03-ingress-nginx-helm.yaml
 ```
 
-5. Upgrade cluster, for next demo
+5. App of Apps
+
+Set the App Of Apps pattern
 
 ```
-./scripts/upgrade-talos-argocd-downstream-cluster.sh talos-argocd-3
+kubectl apply -f argocd/applications/app-of-apps/infra-apps.yaml 
 ```

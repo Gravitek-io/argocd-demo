@@ -1,7 +1,7 @@
 {
   "name": "talos-argocd-3",
   "values": {
-    "namespace": "nginx",
-    "helmReleaseName": "nginx"
+    "namespace": "incorrect-nginx",
+    "helmReleaseName": "incorrect-nginx"
   }
 }

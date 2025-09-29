@@ -36,3 +36,10 @@ helm template cert-manager ./ \
   -f ../../../clusters/talos-argocd-1/cert-manager/values.yaml \
   --no-hooks | kubectl diff -f -
 ```
+
+
+6. Upgrade cluster, for next demos
+
+```
+./scripts/upgrade-talos-argocd-downstream-cluster.sh talos-argocd-1
+```

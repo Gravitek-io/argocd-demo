@@ -7,7 +7,7 @@ CLUSTER_NEXT_VERSION="1.34.0"
 
 SERVER_URL=$(yq ".clusters[] | select(.name == \"${CLUSTER_NAME}\") | .cluster.server" kubeconfig)
 
-OLD_URL=$(talosctl --context ${CLUSTER_NAME} -n 127.0.0.1 get mc -o yaml | yq '.spec | fromyaml | .cluster.controlPlane.endpoint' | | grep '^https' | head -n1)
+OLD_URL=$(talosctl --context ${CLUSTER_NAME} -n 127.0.0.1 get mc -o yaml | yq '.spec | fromyaml | .cluster.controlPlane.endpoint' | grep '^https' | head -n1)
 
 echo "Server URL for ${CLUSTER_NAME}: $OLD_URL -> $SERVER_URL"
 
