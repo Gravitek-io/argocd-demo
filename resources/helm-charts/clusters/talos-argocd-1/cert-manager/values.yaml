@@ -1,0 +1,3 @@
+cert-manager:
+  global:
+    logLevel: 1
