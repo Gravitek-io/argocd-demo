@@ -8,7 +8,7 @@ ApplicationSet with Git Generator
 kctx admin@talos-argocd-3
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 helm install -n incorrect-nginx --create-namespace incorrect-nginx ingress-nginx/ingress-nginx --version 4.11.6 --set controller.service.type=NodePort
-kubecolor get all -n nginx
+kubecolor get all -n incorrect-nginx
 ```
 
 2. Show folders resources, manifests, etc.
