@@ -9,7 +9,7 @@
 ```shell
 kubectx admin@talos-argocd-manager
 
-kubectl apply -f argocd/applications/infra/01-goldilocks-helm.yaml
+kubectl apply -n argocd -f argocd/applications/infra/01-goldilocks-helm.yaml
 ```
 
 3. Check on ArgoCD webapp
